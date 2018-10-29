@@ -9,14 +9,18 @@
             </v-toolbar>
             <v-card-text>
               <v-form ref="form" v-model="valid" lazy-validation>
-                <v-text-field prepend-icon="person" name="email" label="email" type="email" :rules="emailRules" v-model="email"></v-text-field>
-                <v-text-field prepend-icon="lock" name="password" label="Password" type="password" :rules="passwordRules" :counter="6" v-model="password"></v-text-field>
-                <v-text-field prepend-icon="repeat" name="confirm-password" label="Confirm Password" type="password" :rules="confirmPasswordRules" :counter="6" v-model="confirmPassword"></v-text-field>
+                <v-text-field prepend-icon="person" name="email" label="email" type="email" :rules="emailRules"
+                              v-model="email"></v-text-field>
+                <v-text-field prepend-icon="lock" name="password" label="Password" type="password"
+                              :rules="passwordRules" :counter="6" v-model="password"></v-text-field>
+                <v-text-field prepend-icon="repeat" name="confirm-password" label="Confirm Password" type="password"
+                              :rules="confirmPasswordRules" :counter="6" v-model="confirmPassword"></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" @click="onSubmit" :disabled="!valid">Create Account</v-btn>
+              <v-btn color="primary" @click="onSubmit" :loading="loading" :disabled="!valid || loading">Create Account
+              </v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -47,6 +51,11 @@
         ]
       }
     },
+    computed: {
+      loading() {
+        return this.$store.getters.loading
+      }
+    },
     methods: {
       onSubmit() {
         if (this.$refs.form.validate()) {
@@ -54,7 +63,12 @@
             email: this.email,
             password: this.password
           }
-          console.log(user)
+          this.$store.dispatch('registerUser', user)
+            .then(() => {
+              this.$router.push('/')
+            })
+            .catch(() => {
+            })
         }
       }
     }

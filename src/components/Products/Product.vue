@@ -3,27 +3,27 @@
     <section class="product mt-3 elevation-3">
       <v-layout row wrap>
         <v-flex xs12 lg6>
-          <img src="https://rukminim1.flixcart.com/flap/1400/1400/image/7c0b69.jpg?q=50" class="product_img">
+          <img :src="product.imageSrc" class="product_img">
         </v-flex>
 
         <v-flex xs12 lg6>
           <div class="product_info">
-            <h5 class="product_title display-1 mb-3 mt-3">Lorem Lorem</h5>
+            <h5 class="product_title display-1 mb-3 mt-3">{{ product.title }}</h5>
             <p class="product_category title">
-              <span class="product_title">Vendor: </span>Lorem
+              <span class="product_title">Vendor: </span>{{ product.vendor.charAt(0).toUpperCase() + product.vendor.substr(1) }}
             </p>
             <p class="product_price title">
-              <span class="product_title">price: </span>$ 1000
+              <span class="product_title">price: </span>$ {{ product.price }}
             </p>
             <p class="product_color title">
               <span class="product_title">Color: </span>
-              <span :title="'purple'" :style="{ backgroundColor: 'purple' }" class="product_color__bg"></span>
+              <span :title="product.color" :style="{ backgroundColor: product.color }" class="product_color__bg"></span>
             </p>
             <p class="title">
-              <span class="product_title">Material: </span>Lorem
+              <span class="product_title">Material: </span>{{ product.material.charAt(0).toUpperCase() + product.material.substr(1) }}
             </p>
             <div class="title mb-5">
-              <p class="product_title mb-2">Description: </p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+              <p class="product_title mb-2">Description: </p>{{ product.description }}
             </div>
             <v-btn color="primary" class="headline">Edit</v-btn>
             <v-btn color="primary" class="headline">Buy</v-btn>
@@ -36,8 +36,12 @@
 
 <script>
   export default {
-    data() {
-      return {}
+    props: ['id'],
+    computed: {
+      product () {
+        const id = this.id
+        return this.$store.getters.productById(id)
+      }
     }
   }
 </script>

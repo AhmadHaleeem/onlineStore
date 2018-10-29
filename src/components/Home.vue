@@ -5,7 +5,7 @@
         <v-flex xs12>
           <v-carousel delimiter-icon="stop" prev-icon="mdi-arrow-left" next-icon="mdi-arrow-right">
             <v-carousel-item
-              v-for="(product, i) in products"
+              v-for="(product, i) in promoProducts"
               :key="i"
               :src="product.imageSrc"></v-carousel-item>
           </v-carousel>
@@ -46,43 +46,12 @@
 
 <script>
   export default {
-    data() {
-      return {
-        products: [
-          {
-            id: '1',
-            title: 'Lenovo Legion Y520',
-            vendor: 'Lenovo',
-            color: 'Black',
-            material: 'metal/plastic',
-            description: 'Intel core i5 7400HQ MHz/15.6',
-            price: 784,
-            promo: false,
-            imageSrc: 'https://rukminim1.flixcart.com/flap/1400/1400/image/7c0b69.jpg?q=50'
-          },
-          {
-            id: '2',
-            title: 'Asus FX503VD',
-            vendor: 'Asus',
-            color: 'white',
-            material: 'plastic',
-            description: 'Intel core i5 7400HQ MHz/15.6',
-            price: 460,
-            promo: false,
-            imageSrc: 'https://c.s-microsoft.com/en-us/CMSImages/Windows10_ViewAll__hero_1920.jpg?version=9827798b-32be-675f-4a86-ae7dca0d2e19'
-          },
-          {
-            id: '3',
-            title: 'Asus TUF',
-            vendor: 'Asus',
-            color: 'red',
-            material: 'plastic',
-            description: 'Intel core i5 7400HQ MHz/15.6',
-            price: 944,
-            promo: false,
-            imageSrc: 'https://www.photoworkout.com/wp-content/uploads/2018/05/Best-Laptops-for-Photo-Editing.jpg'
-          }
-        ]
+    computed: {
+      promoProducts () {
+        return this.$store.getters.promoProducts
+      },
+      products () {
+        return this.$store.getters.products
       }
     }
   }
