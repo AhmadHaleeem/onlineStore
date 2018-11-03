@@ -77,11 +77,14 @@
             .then(() => {
               this.$router.push('/')
             })
-            .catch(() => {
-            })
+            .catch(() => {})
         }
       }
     },
-
+    created () {
+      if (this.$route.query['loginError']) {
+        this.$store.dispatch('setError', 'Pleas Login to Access this Page')
+      }
+    }
   }
 </script>
