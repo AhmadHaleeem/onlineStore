@@ -34,7 +34,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn dark color="light-blue darken-4" round outline :to="'/products/' + product.id">Description</v-btn>
-              <v-btn dark color="light-blue darken-4" round>Add to cart</v-btn>
+              <app-buy-dialog :product="product"></app-buy-dialog>
             </v-card-actions>
           </v-card>
         </v-flex>

@@ -25,19 +25,19 @@
           </v-flex>
         </v-layout>
 
-        <v-layout>
+        <v-layout row>
           <v-flex xs12>
             <img :src="imageSrc" height="200px" v-if="imageSrc">
           </v-flex>
         </v-layout>
 
-        <v-layout>
+        <v-layout row>
           <v-flex xs12>
             <v-switch color="primary" label="Add to Promo?" v-model="promo"></v-switch>
           </v-flex>
         </v-layout>
 
-        <v-layout>
+        <v-layout row>
           <v-flex xs12>
             <v-spacer></v-spacer>
             <v-btn :loading="loading" :disabled="!valid || !image || loading" class="success" @click="createProduct">Create product</v-btn>
